@@ -17,7 +17,10 @@ const templatesEndPoint = `/api/tower-analytics/${apiVersion}/templates/`;
 const roiEndpoint = `/api/tower-analytics/${apiVersion}/roi_templates/`;
 const jobExplorerEndpoint = '/api/tower-analytics/v1/job_explorer/';
 const jobExplorerOptionsEndpoint =
-  '/api/tower-analytics/v1/job_explorer_options/';
+'/api/tower-analytics/v1/job_explorer_options/';
+const clustersOptionsEndpoint =
+'/api/tower-analytics/v1/dashboard_clusters_options/';
+const eventExplorerEndpoint = '/api/tower-analytics/v1/event_explorer/';
 
 function getAbsoluteUrl() {
     const url = window.location.href;
@@ -106,6 +109,15 @@ export const readJobExplorerOptions = ({ params = {}}) => {
     }).then(handleResponse);
 };
 
+export const readClustersOptions = ({ params = {}}) => {
+    const formattedUrl = getAbsoluteUrl();
+    let url = new URL(clustersOptionsEndpoint, formattedUrl);
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+    }).then(handleResponse);
+};
+
 export const readJobExplorer = ({ params = {}}) => {
     const { limit, offset, sort_by } = params;
     const paginationParams = {
@@ -117,6 +129,32 @@ export const readJobExplorer = ({ params = {}}) => {
     const formattedUrl = getAbsoluteUrl();
     let url = new URL(jobExplorerEndpoint, formattedUrl);
     url.search = qs;
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+    }).then(handleResponse);
+};
+
+export const readEventExplorer = ({ params = {}}) => {
+    const { limit, offset, sort_by } = params;
+    const paginationParams = {
+        limit,
+        offset,
+        sort_by
+    };
+    const qs = stringify(paginationParams);
+    const formattedUrl = getAbsoluteUrl();
+    let url = new URL(eventExplorerEndpoint, formattedUrl);
+    url.search = qs;
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+    }).then(handleResponse);
+};
+
+export const readClustersBarChart = ({ params = {}}) => {
+    const formattedUrl = getAbsoluteUrl();
+    let url = new URL(jobExplorerEndpoint, formattedUrl);
     return fetch(url, {
         method: 'POST',
         body: JSON.stringify(params)
