@@ -18,6 +18,7 @@ import { ExternalLinkAltIcon as PFExternalLinkIcon } from '@patternfly/react-ico
 import LoadingState from '../Components/LoadingState';
 import { formatDateTime, formatJobType } from '../Utilities/helpers';
 import JobStatus from './JobStatus';
+import JobHostStatuses from '../Charts/JobHostStatuses';
 
 const headerLabels = [
     'Id/Name',
@@ -167,6 +168,10 @@ const buildListRow = (items, ariaLabel, ariaLabelledBy, windowWidth) => {
                                     </DataListCell>
                                 ] }
                             />
+                            { item.most_failed_tasks !== null &&
+                                // add host component here and pass item as prop
+                                <JobHostStatuses data={ item.most_failed_tasks } />
+                            }
                         </DataListContent>
                     </DataListItem>
                 );
