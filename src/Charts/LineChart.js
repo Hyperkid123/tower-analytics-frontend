@@ -27,13 +27,13 @@ class LineChart extends Component {
         const formattedDate = formatDate(date);
         const { clusterId, templateId, orgId } = this.props;
         const initialQueryParams = {
-            startDate: formattedDate,
-            endDate: formattedDate,
-            quickDateRange: 'custom',
+            start_date: formattedDate,
+            end_date: formattedDate,
+            quick_date_range: 'custom',
             status: [ 'failed', 'successful' ],
-            clusterId,
-            orgId,
-            templateId
+            org_id: orgId,
+            template_id: templateId,
+            cluster_id: clusterId
         };
 
         const search = stringify(initialQueryParams, { arrayFormat: 'bracket' });
