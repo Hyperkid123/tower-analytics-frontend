@@ -96,7 +96,6 @@ export const useQueryParams = initial => {
                 urlFormatted[camelToSnakeCase(key)] = params[key];
             }
         });
-        console.log('urlformatted', urlFormatted);
         return urlFormatted;
     };
 
