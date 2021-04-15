@@ -5,12 +5,15 @@ const notificationsEndpoint = `/api/tower-analytics/v0/notifications/`;
 const preflightEndpoint = `/api/tower-analytics/v0/authorized/`;
 
 /* v1 endpoints */
+const plannerEndpoint = '/api/tower-analytics/v1/job_explorer/';
 const jobExplorerEndpoint = '/api/tower-analytics/v1/job_explorer/';
 const hostExplorerEndpoint = '/api/tower-analytics/v1/host_explorer/';
 const eventExplorerEndpoint = '/api/tower-analytics/v1/event_explorer/';
 const ROIEndpoint = '/api/tower-analytics/v1/roi_templates/';
 
 /* page options endpoints */
+const plannerOptionsEndpoint =
+    '/api/tower-analytics/v1/job_explorer_options/';
 const jobExplorerOptionsEndpoint =
     '/api/tower-analytics/v1/job_explorer_options/';
 const ROITemplatesOptionsEndpoint = '/api/tower-analytics/v1/roi_templates_options/';
@@ -40,6 +43,22 @@ function authenticatedFetch(endpoint, options) {
 
 export const preflightRequest = () => {
     return authenticatedFetch(preflightEndpoint).then(handleResponse);
+};
+
+export const readPlanner = ({ params = {}}) => {
+    const { limit, offset, sort_by } = params;
+    const paginationParams = {
+        limit,
+        offset,
+        sort_by
+    };
+    const qs = stringify(paginationParams);
+    let url = new URL(plannerEndpoint, window.location.origin);
+    url.search = qs;
+    return authenticatedFetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+    }).then(handleResponse);
 };
 
 export const readJobExplorer = ({ params = {}}) => {
@@ -139,6 +158,14 @@ export const readNotifications = ({ params = {}}) => {
     let url = new URL(notificationsEndpoint, window.location.origin);
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     return authenticatedFetch(url).then(handleResponse);
+};
+
+export const readPlannerOptions = ({ params = {}}) => {
+    let url = new URL(plannerOptionsEndpoint, window.location.origin);
+    return authenticatedFetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+    }).then(handleResponse);
 };
 
 export const readJobExplorerOptions = ({ params = {}}) => {
