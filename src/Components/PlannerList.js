@@ -41,7 +41,9 @@ const PlannerList = ({ jobs }) => {
                                 </a>
                             </Td>
                             <Td dataLabel='Status'>
-                                <JobStatus status={item.status} />
+                                <div>
+                                    <JobStatus status={item.status} />
+                                </div>
                             </Td>
                             <Td dataLabel='Cluster'>
                                 {item.cluster_name}
