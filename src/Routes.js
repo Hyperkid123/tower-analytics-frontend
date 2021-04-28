@@ -51,6 +51,13 @@ const JobExplorer = asyncComponent(() =>
     )
 );
 
+const SavingsPlannerAdd = asyncComponent(() =>
+    import(
+        /* webpackChunkName: "automation_analytics" */
+        './Containers/SavingsPlanner/SavingsPlannerAdd'
+    )
+);
+
 const SavingsPlanner = asyncComponent(() =>
     import(
         /* webpackChunkName: "automation_analytics" */
@@ -108,6 +115,11 @@ export const Routes = props => {
                 path={Paths.jobExplorer}
                 component={JobExplorer}
                 rootClass="jobExplorer"
+            />
+            <InsightsRoute
+                path={Paths.savingsPlannerAdd}
+                component={SavingsPlannerAdd}
+                rootClass="SavingsPlannerAdd"
             />
             <InsightsRoute
                 path={Paths.savingsPlanner}
