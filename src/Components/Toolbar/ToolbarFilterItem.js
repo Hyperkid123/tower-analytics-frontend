@@ -59,7 +59,7 @@ const ToolbarFilterItem = ({
         }
     };
 
-    const onSelect = (event, selection) => {
+    const onSelect = (_, selection) => {
         if (options.isSingle) {
             setFilter(selection);
             setExpanded(false);
@@ -71,8 +71,7 @@ const ToolbarFilterItem = ({
         }
     };
 
-    const onFilter = event => {
-        const textInput = event.target.value;
+    const onFilter = (_, textInput) => {
         if (textInput === '') {
             return renderValues(values);
         } else {
