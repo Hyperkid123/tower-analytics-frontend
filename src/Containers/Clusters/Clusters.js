@@ -185,14 +185,9 @@ const Clusters = () => {
                     setFilters={setFromToolbar}
                 />
             </PageHeader>
-            {preflightError && (
+            {(preflightError || error) && (
                 <Main>
-                    <EmptyState {...preflightError} />
-                </Main>
-            )}
-            {error && (
-                <Main>
-                    <ApiErrorState message={error.error} />
+                    { preflightError ? <EmptyState {...preflightError} /> : <ApiErrorState message={error.error} /> }
                 </Main>
             )}
             {!preflightError && !error && (
